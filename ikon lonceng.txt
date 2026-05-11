@@ -1,0 +1,31 @@
+Ikon lonceng (<i class="ph ph-bell"></i>) di sebelah tombol "Keluar" itu umumnya digunakan sebagai Pusat Notifikasi (Notification Center) dalam sebuah aplikasi web.
+
+Nantinya, fungsi ikon tersebut bisa dikembangkan menjadi beberapa hal yang sangat berguna untuk Admin:
+
+1. Menampilkan Pemberitahuan Real-time
+Ketika ada aktivitas penting di LMS, admin akan mendapat peringatan (bisa berupa angka merah kecil di sudut lonceng). Contoh aktivitasnya:
+
+"Siswa baru (Budi) baru saja mendaftar." (Jika ada fitur registrasi mandiri).
+
+"Guru Siti Aminah baru saja mengunggah materi Biologi Bab 2."
+
+"Terdapat 5 tugas yang belum dinilai oleh Guru Budi."
+
+2. Pengingat Sistem (System Alerts)
+Lonceng juga bisa digunakan untuk memberi tahu admin tentang hal-hal teknis:
+
+"Backup database terakhir dilakukan 30 hari yang lalu."
+
+"Kapasitas penyimpanan server (storage) sudah mencapai 90%."
+
+3. Pesan Internal (Messaging)
+Jika nanti LMS ini memiliki fitur pesan antar pengguna (misal: guru mengirim pesan ke admin untuk menanyakan jadwal), notifikasinya akan masuk ke lonceng ini.
+
+Bagaimana Cara Membuatnya Aktif Nanti?
+Saat ini, ikon lonceng tersebut masih "mati" (hanya tampilan saja). Jika nanti Anda ingin mengaktifkannya, kita bisa menggunakan Dropdown Bootstrap/Tailwind.
+
+Ketika lonceng diklik, akan muncul kotak dropdown ke bawah berisi daftar pesan-pesan singkat dari tabel khusus di database (misalnya tabel notifikasi).
+
+Untuk saat ini, karena kita sedang fokus membangun kerangka utama (Guru, Kelas, Mapel), lonceng tersebut dibiarkan sebagai pelengkap UI (User Interface) agar dashboard terasa lebih lengkap dan profesional.
+
+Apakah Anda ingin lanjut ke bagian Mata Pelajaran, atau ada bagian desain lain yang ingin diperbaiki dulu?

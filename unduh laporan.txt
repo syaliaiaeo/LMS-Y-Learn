@@ -1,0 +1,40 @@
+Tombol Unduh Laporan (<i class="ph ph-download-simple"></i>) nantinya akan berfungsi sebagai fitur Eksport Data (Generate Report).
+
+Di sekolah sungguhan, Kepala Sekolah atau Dinas Pendidikan biasanya meminta laporan fisik atau file rekap data akademik. Tombol ini adalah jalan pintas bagi Admin untuk membuat laporan tersebut secara otomatis tanpa perlu merekap manual satu per satu.
+
+Nantinya, fitur ini bisa dikembangkan menjadi 3 tingkatan, dari yang paling sederhana hingga yang paling canggih:
+
+1. Ekspor ke CSV (Paling Mudah & Tanpa Library)
+Ini adalah cara paling standar. Saat tombol diklik, sistem PHP akan mengambil data dari database (misalnya daftar semua Guru dan Siswa), lalu mengubah tipe file PHP tersebut menjadi file Excel dasar (.csv).
+
+Kelebihan: Sangat ringan, cepat, dan tidak perlu menginstal aplikasi tambahan di server.
+
+Kekurangan: Tampilannya polos, tidak ada warna atau logo sekolah.
+
+2. Ekspor ke Excel Modern (.xlsx)
+Jika Anda menggunakan library PHP bernama PhpSpreadsheet, tombol ini bisa mengunduh file Excel yang sudah diformat dengan rapi.
+
+Fitur: Bisa langsung ada warna selnya, kolomnya sudah diatur lebarnya, dan teksnya rapi.
+
+3. Ekspor ke PDF (Sangat Profesional)
+Ini adalah standar emas aplikasi SaaS. Kita bisa menggunakan library seperti DomPDF atau FPDF.
+
+Fitur: Saat diklik, tombol ini akan mengunduh file PDF yang sudah berisi Kop Surat SMA YAPAN, logo sekolah, tabel data, dan di bagian bawah ada kolom tanda tangan Kepala Sekolah beserta tanggal otomatis.
+
+Bagaimana Logika PHP-nya Nanti?
+Secara teknis, nanti kita hanya akan mengarahkan tombol tersebut ke sebuah file khusus (misal: cetak_laporan.php). Di dalam file itu, kita akan menggunakan trik Manipulasi Header PHP untuk memaksa browser mengunduh file, bukan menampilkannya sebagai halaman web.
+
+Contoh sederhana kode rahasianya nanti:
+
+PHP
+<?php
+// Trik agar browser langsung mengunduh file
+header("Content-type: application/vnd-ms-excel");
+header("Content-Disposition: attachment; filename=Laporan_Akademik_YAPAN.xls");
+
+// Di bawahnya tinggal buat tabel HTML biasa
+echo "Tabel data dari database...";
+?>
+Untuk saat ini, tombol tersebut kita jadikan "pajangan UI" (User Interface) terlebih dahulu agar dashboard terlihat lengkap dan visioner. Kita akan menghidupkannya setelah semua data (Guru, Siswa, Kelas, dan Mapel) sudah masuk ke dalam database, agar laporan yang dicetak tidak kosong.
+
+Bagaimana, apakah Anda ingin lanjut menyatukan Guru dan Kelas di dalam Modul Mata Pelajaran sekarang?

@@ -1,0 +1,102 @@
+Pengamatan yang sangat tajam! Betul sekali, saat ini tombol-tombol tersebut hanyalah "pajangan" (dummy) dengan link href="#". Kita belum memberikan perintah PHP kepada tombol-tombol tersebut untuk melakukan aksi Edit atau Hapus.
+
+Mari kita hidupkan tombol-tombol tersebut. Untuk mempermudah, kita akan menggunakan Satu File Penghapus Sentral (hapus.php) agar kita tidak perlu membuat banyak file untuk menghapus data.
+
+Ikuti 2 langkah mudah ini:
+
+1. Perbarui Link Tombol di 4 File Anda
+Anda perlu mencari bagian <td class="px-6 py-4 text-center"> yang berisi tombol aksi di keempat file data Anda, lalu gantilah dengan kode di bawah ini.
+
+(A) Buka data_guru.php, cari bagian aksinya, dan ganti menjadi:
+
+HTML
+<td class="px-6 py-4 text-center">
+    <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <a href="edit_guru.php?id=<?php echo $data['id_user']; ?>" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Edit">
+            <i class="ph ph-pencil-simple text-lg"></i>
+        </a>
+        <a href="hapus.php?jenis=guru&id=<?php echo $data['id_user']; ?>" onclick="return confirm('Yakin ingin menghapus akun guru ini?');" class="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors" title="Hapus">
+            <i class="ph ph-trash text-lg"></i>
+        </a>
+    </div>
+</td>
+(B) Buka data_siswa.php, cari bagian aksinya, dan ganti menjadi:
+
+HTML
+<td class="px-6 py-4 text-center">
+    <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <a href="edit_siswa.php?id=<?php echo $data['id_user']; ?>" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Edit">
+            <i class="ph ph-pencil-simple text-lg"></i>
+        </a>
+        <a href="hapus.php?jenis=siswa&id=<?php echo $data['id_user']; ?>" onclick="return confirm('Yakin ingin menghapus data siswa ini?');" class="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors" title="Hapus">
+            <i class="ph ph-trash text-lg"></i>
+        </a>
+    </div>
+</td>
+(C) Buka data_kelas.php, cari bagian aksinya (saya sudah tambahkan tombol editnya di sini), dan ganti menjadi:
+
+HTML
+<td class="px-6 py-4 text-center">
+    <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <a href="edit_kelas.php?id=<?php echo $data['id_kelas']; ?>" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Edit">
+            <i class="ph ph-pencil-simple text-lg"></i>
+        </a>
+        <a href="hapus.php?jenis=kelas&id=<?php echo $data['id_kelas']; ?>" onclick="return confirm('Menghapus kelas akan mengosongkan data kelas pada siswa dan mapel. Yakin?');" class="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors" title="Hapus">
+            <i class="ph ph-trash text-lg"></i>
+        </a>
+    </div>
+</td>
+(D) Buka data_mapel.php, cari bagian aksinya (saya sudah tambahkan tombol editnya), dan ganti menjadi:
+
+HTML
+<td class="px-6 py-4 text-center">
+    <div class="flex justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+        <a href="edit_mapel.php?id=<?php echo $data['id_mapel']; ?>" class="p-2 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Edit">
+            <i class="ph ph-pencil-simple text-lg"></i>
+        </a>
+        <a href="hapus.php?jenis=mapel&id=<?php echo $data['id_mapel']; ?>" onclick="return confirm('Yakin ingin menghapus mata pelajaran ini?');" class="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors" title="Hapus">
+            <i class="ph ph-trash text-lg"></i>
+        </a>
+    </div>
+</td>
+2. Buat File hapus.php (Mesin Penghapus)
+Sekarang, buat file baru bernama hapus.php di dalam folder admin/. File ini akan menerima instruksi dari tombol-tombol di atas dan menghapus data dari database.
+
+Masukkan kode ini ke dalam hapus.php:
+
+PHP
+<?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') { header("Location: ../index.php"); exit; }
+
+require_once '../config/koneksi.php';
+
+// Menangkap jenis data yang ingin dihapus dan ID-nya
+$jenis = $_GET['jenis'];
+$id    = $_GET['id'];
+
+if ($jenis == 'guru') {
+    mysqli_query($koneksi, "DELETE FROM users WHERE id_user='$id' AND role='guru'");
+    header("Location: data_guru.php");
+    
+} elseif ($jenis == 'siswa') {
+    mysqli_query($koneksi, "DELETE FROM users WHERE id_user='$id' AND role='siswa'");
+    header("Location: data_siswa.php");
+    
+} elseif ($jenis == 'kelas') {
+    mysqli_query($koneksi, "DELETE FROM kelas WHERE id_kelas='$id'");
+    header("Location: data_kelas.php");
+    
+} elseif ($jenis == 'mapel') {
+    mysqli_query($koneksi, "DELETE FROM mapel WHERE id_mapel='$id'");
+    header("Location: data_mapel.php");
+} else {
+    // Jika ada yang iseng mengubah URL
+    header("Location: index.php");
+}
+?>
+Silakan Uji Coba Hapus!
+Sekarang Fitur Hapus Anda sudah aktif 100%. Jika Anda menekan ikon tong sampah merah, akan muncul peringatan (pop-up confirm), dan jika di-oke-kan, datanya akan lenyap dari sistem.
+
+Bagaimana dengan Tombol Edit?
+Fitur Edit sedikit lebih kompleks karena kita perlu membuat "Formulir yang sudah terisi data lama". Jika fitur hapus sudah berjalan lancar di komputer Anda, kita akan mulai membuat edit_guru.php dan edit_siswa.php. Apakah Anda siap?

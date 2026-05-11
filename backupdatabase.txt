@@ -1,0 +1,89 @@
+Membuat fungsi Backup Database adalah langkah yang sangat cerdas untuk menjaga keamanan data LMS Anda. Secara teknis, proses ini disebut Database Dump, di mana kita memerintahkan PHP untuk membaca seluruh struktur dan isi tabel, lalu menyusunnya menjadi file teks .sql.
+
+Berikut adalah cara menerapkannya dalam proyek Anda:
+
+1. Buat File admin/backup_proses.php
+File ini akan bekerja di "balik layar". Saat dipanggil, ia tidak akan menampilkan halaman web, melainkan akan langsung memicu download file .sql.
+
+PHP
+<?php
+session_start();
+// Pastikan hanya admin yang bisa melakukan backup
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 'admin') {
+    exit("Akses ditolak.");
+}
+
+require_once '../config/koneksi.php';
+
+// 1. Ambil semua daftar tabel dari database
+$tables = array();
+$result = mysqli_query($koneksi, "SHOW TABLES");
+while ($row = mysqli_fetch_row($result)) {
+    $tables[] = $row[0];
+}
+
+$return = "-- LMS YAPAN Database Backup\n";
+$return .= "-- Generated: " . date('Y-m-d H:i:s') . "\n\n";
+
+// 2. Loop setiap tabel untuk mengambil struktur dan datanya
+foreach ($tables as $table) {
+    // Ambil perintah CREATE TABLE
+    $result = mysqli_query($koneksi, "SHOW CREATE TABLE $table");
+    $row = mysqli_fetch_row($result);
+    $return .= "\n\n" . $row[1] . ";\n\n";
+
+    // Ambil semua isi data tabel
+    $result = mysqli_query($koneksi, "SELECT * FROM $table");
+    $num_fields = mysqli_num_fields($result);
+
+    for ($i = 0; $i < $num_fields; $i++) {
+        while ($row = mysqli_fetch_row($result)) {
+            $return .= "INSERT INTO $table VALUES(";
+            for ($j = 0; $j < $num_fields; $j++) {
+                $row[$j] = addslashes($row[$j]);
+                if (isset($row[$j])) {
+                    $return .= '"' . $row[$j] . '"';
+                } else {
+                    $return .= '""';
+                }
+                if ($j < ($num_fields - 1)) {
+                    $return .= ',';
+                }
+            }
+            $return .= ");\n";
+        }
+    }
+    $return .= "\n\n\n";
+}
+
+// 3. Header untuk memaksa browser mengunduh file
+$fileName = 'backup_lms_' . date('d-m-Y') . '_' . time() . '.sql';
+header('Content-Type: application/octet-stream');
+header("Content-Transfer-Encoding: Binary");
+header("Content-disposition: attachment; filename=\"" . $fileName . "\"");
+
+echo $return;
+exit;
+2. Hubungkan Tombol di Dashboard
+Buka file admin/index.php, cari bagian Aksi Cepat untuk tombol Backup, dan ubah tag <button> menjadi link <a> yang mengarah ke file di atas:
+
+PHP
+<a href="backup_proses.php" class="w-full text-left p-4 rounded-xl border border-slate-200 hover:border-sekolah-300 hover:bg-sekolah-50 hover:text-sekolah-700 transition-all flex items-center justify-between group text-slate-600">
+    <span class="text-sm font-bold">Backup Database</span>
+    <i class="ph ph-database text-xl text-slate-400 group-hover:text-sekolah-600 transition-colors"></i>
+</a>
+Cara Kerja SQL Backup
+Agar Anda lebih memahami apa yang sebenarnya terjadi saat tombol tersebut diklik, bayangkan tabel database Anda (yang berisi baris dan kolom) sedang "diterjemahkan" menjadi instruksi tertulis agar bisa dibangun ulang di komputer lain.
+
+Anda bisa mencoba simulasi di bawah ini untuk melihat bagaimana data tabel berubah menjadi kode SQL secara real-time.
+
+
+Tampilkan visualisasi
+
+
+Tips Tambahan untuk Admin:
+Simpan di Tempat Berbeda: Setelah mengunduh file .sql, jangan hanya menyimpannya di laptop yang sama dengan server XAMPP. Kirimkan ke Google Drive atau simpan di Flashdisk. Jika laptop rusak, data Anda tetap aman.
+
+Cek Berkala: Cobalah sesekali untuk mengimpor file backup tersebut ke database baru (tes) untuk memastikan file tersebut tidak rusak (corrupt).
+
+Sekarang tombol Backup Anda sudah berfungsi! Apakah Anda ingin lanjut ke bagian Manajemen Siswa atau menyempurnakan Modul Mata Pelajaran?
