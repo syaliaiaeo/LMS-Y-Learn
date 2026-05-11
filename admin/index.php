@@ -37,37 +37,37 @@ include '../includes/header.php';
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
     
-    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-sekolah-200 transition-all group">
+    <a href="data_guru.php" class="block bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-sekolah-200 transition-all group">
         <div class="w-12 h-12 bg-slate-50 text-slate-600 group-hover:bg-sekolah-50 group-hover:text-sekolah-600 transition-colors rounded-xl flex items-center justify-center mb-4">
             <i class="ph ph-chalkboard-teacher text-2xl"></i>
         </div>
         <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Total Guru</p>
         <h3 class="text-3xl font-black text-slate-800"><?php echo number_format($tot_guru); ?></h3>
-    </div>
+    </a>
 
-    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-sekolah-200 transition-all group">
+    <a href="data_siswa.php" class="block bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-sekolah-200 transition-all group">
         <div class="w-12 h-12 bg-slate-50 text-slate-600 group-hover:bg-sekolah-50 group-hover:text-sekolah-600 transition-colors rounded-xl flex items-center justify-center mb-4">
             <i class="ph ph-student text-2xl"></i>
         </div>
         <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Total Siswa</p>
         <h3 class="text-3xl font-black text-slate-800"><?php echo number_format($tot_siswa); ?></h3>
-    </div>
+    </a>
 
-    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-sekolah-200 transition-all group">
+    <a href="data_mapel.php" class="block bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-sekolah-200 transition-all group">
         <div class="w-12 h-12 bg-slate-50 text-slate-600 group-hover:bg-sekolah-50 group-hover:text-sekolah-600 transition-colors rounded-xl flex items-center justify-center mb-4">
             <i class="ph ph-books text-2xl"></i>
         </div>
         <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Mata Pelajaran</p>
         <h3 class="text-3xl font-black text-slate-800"><?php echo number_format($tot_mapel); ?></h3>
-    </div>
+    </a>
 
-    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:border-sekolah-200 transition-all group">
+    <a href="data_kelas.php" class="block bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 hover:border-sekolah-200 transition-all group">
         <div class="w-12 h-12 bg-slate-50 text-slate-600 group-hover:bg-sekolah-50 group-hover:text-sekolah-600 transition-colors rounded-xl flex items-center justify-center mb-4">
             <i class="ph ph-folders text-2xl"></i>
         </div>
         <p class="text-slate-400 text-xs font-bold uppercase tracking-widest mb-1">Total Kelas</p>
         <h3 class="text-3xl font-black text-slate-800"><?php echo number_format($tot_kelas); ?></h3>
-    </div>
+    </a>
 </div>
 
 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
