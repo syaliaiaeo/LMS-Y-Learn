@@ -40,6 +40,14 @@
             <a href="index.php" class="flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all <?php echo ($current_page == 'index.php') ? 'text-guru-700 bg-guru-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'; ?>">
                 <i class="ph ph-squares-four text-xl <?php echo ($current_page == 'index.php') ? 'text-guru-600' : 'text-slate-400'; ?>"></i> Dashboard
             </a>
+
+            <a href="data_siswa.php" class="flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all <?php echo ($current_page == 'data_siswa.php') ? 'text-guru-700 bg-guru-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'; ?>">
+                <i class="ph ph-users text-xl <?php echo ($current_page == 'data_siswa.php') ? 'text-guru-600' : 'text-slate-400'; ?>"></i> Data Siswa & Absensi
+            </a>
+
+            <a href="rekap_absensi.php" class="flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all <?php echo ($current_page == 'rekap_absensi.php') ? 'text-guru-700 bg-guru-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'; ?>">
+                <i class="ph ph-chart-bar text-xl <?php echo ($current_page == 'rekap_absensi.php') ? 'text-guru-600' : 'text-slate-400'; ?>"></i> Rekap Keseluruhan Absen
+            </a>
             
             <a href="materi.php" class="flex items-center gap-3 px-4 py-3 text-sm font-semibold rounded-xl transition-all <?php echo ($current_page == 'materi.php') ? 'text-guru-700 bg-guru-50' : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'; ?>">
                 <i class="ph ph-book-bookmark text-xl <?php echo ($current_page == 'materi.php') ? 'text-guru-600' : 'text-slate-400'; ?>"></i> Materi & Pembelajaran
@@ -78,6 +86,9 @@
             <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest">
                 <?php 
                     if($current_page == 'index.php') echo "Beranda Guru";
+                    else if($current_page == 'data_siswa.php') echo "Data Siswa & Absensi";
+                    // Kondisi baru agar title barnya rapi saat di halaman rekap
+                    else if($current_page == 'rekap_absensi.php') echo "Rekap Absensi Siswa";
                     else echo str_replace('.php', '', ucfirst($current_page));
                 ?>
             </h2>

@@ -19,6 +19,8 @@
 </head>
 <body class="flex min-h-screen text-slate-800">
 
+    <?php $current_page = basename($_SERVER['PHP_SELF']); ?>
+
     <aside class="w-64 border-r border-slate-200 flex flex-col hidden md:flex shrink-0 z-20 shadow-[4px_0_24px_rgba(0,0,0,0.02)]">
         
         <div class="h-16 flex items-center px-8 bg-indigo-50/80 border-b border-indigo-100/50">
@@ -28,23 +30,32 @@
         <div class="flex-1 overflow-y-auto py-8 px-4 space-y-1.5 bg-white">
             <p class="px-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">Menu Utama</p>
             
-            <a href="index.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition-all group">
-                <i class="ph ph-squares-four text-xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i> Dashboard
+            <a href="index.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'index.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-squares-four text-xl transition-colors <?php echo ($current_page == 'index.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Dashboard
             </a>
-            <a href="materi.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition-all group">
-                <i class="ph ph-books text-xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i> Materi Pelajaran
+
+            <a href="absensi.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'absensi.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-calendar-check text-xl transition-colors <?php echo ($current_page == 'absensi.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Absensi Saya
             </a>
-            <a href="tugas.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition-all group">
-                <i class="ph ph-pencil-line text-xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i> Tugas Harian
+
+            <a href="materi.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'materi.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-books text-xl transition-colors <?php echo ($current_page == 'materi.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Materi Pelajaran
             </a>
-            <a href="ujian.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition-all group">
-                <i class="ph ph-exam text-xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i> Kuis & Ujian
+
+            <a href="tugas.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'tugas.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-pencil-line text-xl transition-colors <?php echo ($current_page == 'tugas.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Tugas Harian
             </a>
-            <a href="forum.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition-all group">
-                <i class="ph ph-chats-circle text-xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i> Forum Diskusi
+
+            <a href="ujian.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'ujian.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-exam text-xl transition-colors <?php echo ($current_page == 'ujian.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Kuis & Ujian
             </a>
-            <a href="raport.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-50 hover:text-indigo-600 transition-all group">
-                <i class="ph ph-medal text-xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i> Raport Nilai
+
+            <a href="forum.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'forum.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-chats-circle text-xl transition-colors <?php echo ($current_page == 'forum.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Forum Diskusi
+            </a>
+
+            <a href="raport.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'raport.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-medal text-xl transition-colors <?php echo ($current_page == 'raport.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Raport Nilai
             </a>
         </div>
     </aside>
@@ -52,7 +63,13 @@
     <main class="flex-1 flex flex-col h-screen overflow-hidden bg-slate-50">
         
         <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-8 shrink-0 z-10 shadow-sm shadow-slate-100">
-            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest">Portal Siswa</h2>
+            <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest">
+                <?php 
+                    if($current_page == 'index.php') echo "Beranda Siswa";
+                    else if($current_page == 'absensi.php') echo "Absensi Saya";
+                    else echo str_replace('.php', '', ucfirst($current_page));
+                ?>
+            </h2>
             
             <div class="relative inline-block text-left">
                 <button onclick="document.getElementById('dropdownProfilSiswa').classList.toggle('hidden')" class="flex items-center gap-3 focus:outline-none group hover:bg-slate-50 p-1.5 pr-3 rounded-full transition-colors border border-transparent hover:border-slate-200">
