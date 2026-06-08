@@ -11,7 +11,7 @@ include '../includes/header.php';
 ?>
 
 <?php if (isset($_SESSION['sukses'])): ?>
-    <div id="alert-sukses" class="bg-emerald-50 border border-emerald-200 text-emerald-600 px-4 py-3 rounded-xl mb-6 flex items-center justify-between shadow-sm">
+    <div id="alert-sukses" class="bg-emerald-50 border border-emerald-200 text-emerald-600 px-4 py-3 rounded-xl mb-6 flex items-center justify-between shadow-sm max-w-5xl">
         <div class="flex items-center gap-3">
             <i class="ph ph-check-circle text-xl"></i>
             <span class="text-sm font-bold"><?php echo $_SESSION['sukses']; ?></span>
@@ -21,7 +21,7 @@ include '../includes/header.php';
 <?php unset($_SESSION['sukses']); endif; ?>
 
 <?php if (isset($_SESSION['error'])): ?>
-    <div id="alert-error" class="bg-rose-50 border border-rose-200 text-rose-600 px-4 py-3 rounded-xl mb-6 flex items-center justify-between shadow-sm">
+    <div id="alert-error" class="bg-rose-50 border border-rose-200 text-rose-600 px-4 py-3 rounded-xl mb-6 flex items-center justify-between shadow-sm max-w-5xl">
         <div class="flex items-center gap-3">
             <i class="ph ph-warning-circle text-xl"></i>
             <span class="text-sm font-bold"><?php echo $_SESSION['error']; ?></span>
@@ -30,14 +30,33 @@ include '../includes/header.php';
     </div>
 <?php unset($_SESSION['error']); endif; ?>
 
-<div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8">
+<div class="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8 max-w-5xl">
     <div>
         <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">Ruang Kelas</h1>
         <p class="text-slate-500 text-sm mt-1">Kelola data kelas yang aktif pada tahun ajaran ini.</p>
     </div>
-    <a href="tambah_kelas.php" class="px-5 py-2.5 bg-[#2563EB] hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md w-fit">
-        <i class="ph ph-plus-circle text-lg"></i> Tambah Kelas
-    </a>
+    <div class="flex flex-wrap gap-3">
+        <a href="export_kelas.php" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md w-fit shrink-0">
+            <i class="ph ph-file-csv text-lg"></i> Export CSV
+        </a>
+        <a href="tambah_kelas.php" class="px-5 py-2.5 bg-[#2563EB] hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md w-fit shrink-0">
+            <i class="ph ph-plus-circle text-lg"></i> Tambah Kelas
+        </a>
+    </div>
+</div>
+
+<div class="bg-white p-4 border border-slate-200 rounded-3xl shadow-sm mb-6 flex flex-col md:flex-row items-center justify-between gap-4 max-w-5xl">
+    <div>
+        <h3 class="text-sm font-bold text-slate-800">Import Data Kelas</h3>
+        <p class="text-xs text-slate-500 mt-1">Format file <span class="font-bold text-slate-700">.csv</span> dengan satu kolom: <strong class="text-indigo-600">Nama Kelas</strong></p>
+    </div>
+    <form action="import_kelas.php" method="post" enctype="multipart/form-data" class="flex items-center gap-3 w-full md:w-auto">
+        <input type="file" name="file_csv" accept=".csv" required 
+            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer border border-slate-200 rounded-xl">
+        <button type="submit" name="import" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md shrink-0">
+            <i class="ph ph-upload-simple text-lg"></i> Import
+        </button>
+    </form>
 </div>
 
 <div class="bg-white border border-slate-200 rounded-3xl shadow-sm overflow-hidden max-w-5xl">

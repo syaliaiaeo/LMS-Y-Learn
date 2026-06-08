@@ -76,9 +76,28 @@ include '../includes/header.php';
         <p class="text-slate-500 text-sm mt-1">Kelola data akun pengajar dan riwayat masa aktif tahun ajaran.</p>
     </div>
     
-    <a href="tambah_guru.php" class="px-5 py-2.5 bg-[#2563EB] hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md shrink-0">
-        <i class="ph ph-plus-circle text-lg"></i> Tambah Guru
-    </a>
+    <div class="flex flex-wrap gap-3">
+        <a href="export_guru.php" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md shrink-0">
+            <i class="ph ph-file-csv text-lg"></i> Export CSV
+        </a>
+        <a href="tambah_guru.php" class="px-5 py-2.5 bg-[#2563EB] hover:bg-blue-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md shrink-0">
+            <i class="ph ph-plus-circle text-lg"></i> Tambah Guru
+        </a>
+    </div>
+</div>
+
+<div class="bg-white p-4 border border-slate-200 rounded-2xl shadow-sm mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div>
+        <h3 class="text-sm font-bold text-slate-800">Import Data Massal</h3>
+        <p class="text-xs text-slate-500 mt-1">Format file <span class="font-bold text-slate-700">.csv</span> dengan urutan kolom: <strong class="text-indigo-600">NIP, Nama Lengkap, Username, Password</strong></p>
+    </div>
+    <form action="import_guru.php" method="post" enctype="multipart/form-data" class="flex items-center gap-3 w-full md:w-auto">
+        <input type="file" name="file_csv" accept=".csv" required 
+            class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100 transition-all cursor-pointer border border-slate-200 rounded-xl">
+        <button type="submit" name="import" class="px-5 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm rounded-xl transition-colors flex items-center gap-2 shadow-md shrink-0">
+            <i class="ph ph-upload-simple text-lg"></i> Import
+        </button>
+    </form>
 </div>
 
 <form action="" method="GET" class="flex flex-col md:flex-row gap-3 items-center bg-white p-3 border border-slate-200 rounded-2xl shadow-sm mb-6">
