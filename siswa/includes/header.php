@@ -34,6 +34,10 @@
                 <i class="ph ph-squares-four text-xl transition-colors <?php echo ($current_page == 'index.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Dashboard
             </a>
 
+            <a href="kalender.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'kalender.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
+                <i class="ph ph-calendar text-xl transition-colors <?php echo ($current_page == 'kalender.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Kalender & Jadwal
+            </a>
+
             <a href="absensi.php" class="flex items-center gap-3 px-4 py-3 rounded-xl font-semibold transition-all group <?php echo ($current_page == 'absensi.php') ? 'text-indigo-700 bg-indigo-50' : 'text-slate-600 hover:bg-slate-50 hover:text-indigo-600'; ?>">
                 <i class="ph ph-calendar-check text-xl transition-colors <?php echo ($current_page == 'absensi.php') ? 'text-indigo-600' : 'text-slate-400 group-hover:text-indigo-500'; ?>"></i> Absensi Saya
             </a>
@@ -66,6 +70,7 @@
             <h2 class="text-sm font-bold text-slate-400 uppercase tracking-widest">
                 <?php 
                     if($current_page == 'index.php') echo "Beranda Siswa";
+                    else if($current_page == 'kalender.php') echo "Kalender Akademik";
                     else if($current_page == 'absensi.php') echo "Absensi Saya";
                     else echo str_replace('.php', '', ucfirst($current_page));
                 ?>
